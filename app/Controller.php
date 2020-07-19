@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Services\AdditionalOption;
 use App\Services\Director;
-use App\Services\MainData;
+use App\Services\House;
 use App\Services\Builders\Builder;
-use App\Services\Option;
+use App\Services\MainType;
 use App\Services\Report\ReportService;
 use App\Services\ValidationService;
 
@@ -39,9 +40,10 @@ class Controller
         $result = '';
         try {
             if (!$this->validation->checkRequiredData($data)) throw new \Exception('error validation');
-            $mainData = new MainData($data);
-            $option = new Option($data);
-            $builder = new Builder($mainData, $option);
+            $mainData = new House($data);
+            $mainType = new MainType($data);
+            $additionalOption = new AdditionalOption($data);
+            $builder = new Builder($mainData, $mainType, $additionalOption);
             $result = (new Director($builder))->build();
         } catch (\Exception $e) {
             echo $e->getMessage();wp_die();

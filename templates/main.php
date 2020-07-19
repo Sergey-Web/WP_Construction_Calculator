@@ -253,19 +253,19 @@
                           <div>
 
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="warmFloor4" id="warmFloor41" value="1">
+                                  <input class="form-check-input" type="radio" name="ceilingDecoration" id="warmFloor41" value="1">
                                   <label class="form-check-label" for="warmFloor41">
                                       Base
                                   </label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="warmFloor4" id="warmFloor42" value="2">
+                                  <input class="form-check-input" type="radio" name="ceilingDecoration" id="warmFloor42" value="2">
                                   <label class="form-check-label" for="warmFloor42">
                                       Recommend
                                   </label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="warmFloor4" id="warmFloor43" value="3">
+                                  <input class="form-check-input" type="radio" name="ceilingDecoration" id="warmFloor43" value="3">
                                   <label class="form-check-label" for="warmFloor43">
                                       Premium
                                   </label>
@@ -282,19 +282,19 @@
                           <div>
 
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="floorFinish" id="floorFinish1" value="1">
+                                  <input class="form-check-input" type="radio" name="floorDecoration" id="floorFinish1" value="1">
                                   <label class="form-check-label" for="floorFinish1">
                                       Base
                                   </label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="floorFinish" id="floorFinish2" value="2">
+                                  <input class="form-check-input" type="radio" name="floorDecoration" id="floorFinish2" value="2">
                                   <label class="form-check-label" for="floorFinish2">
                                       Recommend
                                   </label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="floorFinish" id="floorFinish3" value="3">
+                                  <input class="form-check-input" type="radio" name="floorDecoration" id="floorFinish3" value="3">
                                   <label class="form-check-label" for="floorFinish3">
                                       Premium
                                   </label>
@@ -311,19 +311,19 @@
                           <div>
 
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="boiler1" id="boiler11" value="1">
+                                  <input class="form-check-input" type="radio" name="exhaustVentilation" id="boiler11" value="1">
                                   <label class="form-check-label" for="boiler11">
                                       Base
                                   </label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="boiler1" id="boiler12" value="2">
+                                  <input class="form-check-input" type="radio" name="exhaustVentilation" id="boiler12" value="2">
                                   <label class="form-check-label" for="boiler12">
                                       Recommend
                                   </label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="boiler1" id="boiler13" value="3">
+                                  <input class="form-check-input" type="radio" name="exhaustVentilation" id="boiler13" value="3">
                                   <label class="form-check-label" for="boiler13">
                                       Premium
                                   </label>
@@ -605,19 +605,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="designProject" id="designProject1" value="1">
+                                                <input class="form-check-input" type="radio" name="soundproofingCeiling" id="designProject1" value="1">
                                                 <label class="form-check-label" for="designProject1">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="designProject" id="designProject2" value="2">
+                                                <input class="form-check-input" type="radio" name="soundproofingCeiling" id="designProject2" value="2">
                                                 <label class="form-check-label" for="designProject2">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="designProject" id="designProject3" value="3">
+                                                <input class="form-check-input" type="radio" name="soundproofingCeiling" id="designProject3" value="3">
                                                 <label class="form-check-label" for="designProject3">
                                                     Premium
                                                 </label>
@@ -633,19 +633,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="engineeringNetworkProject1" id="engineeringNetworkProject11" value="1">
+                                                <input class="form-check-input" type="radio" name="soundproofingWalls" id="engineeringNetworkProject11" value="1">
                                                 <label class="form-check-label" for="engineeringNetworkProject11">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="engineeringNetworkProject1" id="engineeringNetworkProject12" value="2">
+                                                <input class="form-check-input" type="radio" name="soundproofingWalls" id="engineeringNetworkProject12" value="2">
                                                 <label class="form-check-label" for="engineeringNetworkProject12">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="engineeringNetworkProject1" id="engineeringNetworkProject13" value="3">
+                                                <input class="form-check-input" type="radio" name="soundproofingWalls" id="engineeringNetworkProject13" value="3">
                                                 <label class="form-check-label" for="engineeringNetworkProject13">
                                                     Premium
                                                 </label>
@@ -661,19 +661,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="waterSupplySewerage1" id="waterSupplySewerage11" value="1">
+                                                <input class="form-check-input" type="radio" name="soundproofingFloor" id="waterSupplySewerage11" value="1">
                                                 <label class="form-check-label" for="waterSupplySewerage11">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="waterSupplySewerage1" id="waterSupplySewerage12" value="2">
+                                                <input class="form-check-input" type="radio" name="soundproofingFloor" id="waterSupplySewerage12" value="2">
                                                 <label class="form-check-label" for="waterSupplySewerage12">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="waterSupplySewerage1" id="waterSupplySewerage13" value="3">
+                                                <input class="form-check-input" type="radio" name="soundproofingFloor" id="waterSupplySewerage13" value="3">
                                                 <label class="form-check-label" for="waterSupplySewerage13">
                                                     Premium
                                                 </label>
@@ -689,19 +689,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="heating1" id="heating11" value="1">
+                                                <input class="form-check-input" type="radio" name="entranceDoor" id="heating11" value="1">
                                                 <label class="form-check-label" for="heating11">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="heating1" id="heating12" value="2">
+                                                <input class="form-check-input" type="radio" name="entranceDoor" id="heating12" value="2">
                                                 <label class="form-check-label" for="heating12">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="heating1" id="heating13" value="3">
+                                                <input class="form-check-input" type="radio" name="entranceDoor" id="heating13" value="3">
                                                 <label class="form-check-label" for="heating13">
                                                     Premium
                                                 </label>
@@ -717,19 +717,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="warmFloor2" id="warmFloor21" value="1">
+                                                <input class="form-check-input" type="radio" name="electricUnderfloorHeatingBathrooms" id="warmFloor21" value="1">
                                                 <label class="form-check-label" for="warmFloor21">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="warmFloor2" id="warmFloor22" value="2">
+                                                <input class="form-check-input" type="radio" name="electricUnderfloorHeatingBathrooms" id="warmFloor22" value="2">
                                                 <label class="form-check-label" for="warmFloor22">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="warmFloor2" id="warmFloor23" value="3">
+                                                <input class="form-check-input" type="radio" name="electricUnderfloorHeatingBathrooms" id="warmFloor23" value="3">
                                                 <label class="form-check-label" for="warmFloor23">
                                                     Premium
                                                 </label>
@@ -745,19 +745,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="warmFloor1" id="warmFloor11" value="1">
+                                                <input class="form-check-input" type="radio" name="electricUnderfloorHeatingKitchen" id="warmFloor11" value="1">
                                                 <label class="form-check-label" for="warmFloor11">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="warmFloor1" id="warmFloor12" value="2">
+                                                <input class="form-check-input" type="radio" name="electricUnderfloorHeatingKitchen" id="warmFloor12" value="2">
                                                 <label class="form-check-label" for="warmFloor12">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="warmFloor1" id="warmFloor13" value="3">
+                                                <input class="form-check-input" type="radio" name="electricUnderfloorHeatingKitchen" id="warmFloor13" value="3">
                                                 <label class="form-check-label" for="warmFloor13">
                                                     Premium
                                                 </label>
@@ -773,19 +773,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="basicVentilation" id="basicVentilation1" value="1">
+                                                <input class="form-check-input" type="radio" name="supplyExhaustVentilation" id="basicVentilation1" value="1">
                                                 <label class="form-check-label" for="basicVentilation1">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="basicVentilation" id="basicVentilation2" value="2">
+                                                <input class="form-check-input" type="radio" name="supplyExhaustVentilation" id="basicVentilation2" value="2">
                                                 <label class="form-check-label" for="basicVentilation2">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="basicVentilation" id="basicVentilation3" value="3">
+                                                <input class="form-check-input" type="radio" name="supplyExhaustVentilation" id="basicVentilation3" value="3">
                                                 <label class="form-check-label" for="basicVentilation3">
                                                     Premium
                                                 </label>
@@ -920,19 +920,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="screed1" id="screed11" value="1">
+                                                <input class="form-check-input" type="radio" name="hygienicShower" id="screed11" value="1">
                                                 <label class="form-check-label" for="screed11">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="screed1" id="screed12" value="2">
+                                                <input class="form-check-input" type="radio" name="hygienicShower" id="screed12" value="2">
                                                 <label class="form-check-label" for="screed12">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="screed1" id="screed13" value="3">
+                                                <input class="form-check-input" type="radio" name="hygienicShower" id="screed13" value="3">
                                                 <label class="form-check-label" for="screed13">
                                                     Premium
                                                 </label>
@@ -976,19 +976,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="wallDecoration1" id="wallDecoration11" value="1">
+                                                <input class="form-check-input" type="radio" name="foodWasteDisposer" id="wallDecoration11" value="1">
                                                 <label class="form-check-label" for="wallDecoration11">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="wallDecoration1" id="wallDecoration12" value="2">
+                                                <input class="form-check-input" type="radio" name="foodWasteDisposer" id="wallDecoration12" value="2">
                                                 <label class="form-check-label" for="wallDecoration12">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="wallDecoration1" id="wallDecoration13" value="3">
+                                                <input class="form-check-input" type="radio" name="foodWasteDisposer" id="wallDecoration13" value="3">
                                                 <label class="form-check-label" for="wallDecoration13">
                                                     Premium
                                                 </label>
@@ -1004,19 +1004,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="floorFinish1" id="floorFinish11" value="1">
+                                                <input class="form-check-input" type="radio" name="dryingMachine" id="floorFinish11" value="1">
                                                 <label class="form-check-label" for="floorFinish11">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="floorFinish1" id="floorFinish12" value="2">
+                                                <input class="form-check-input" type="radio" name="dryingMachine" id="floorFinish12" value="2">
                                                 <label class="form-check-label" for="floorFinish12">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="floorFinish1" id="floorFinish13" value="3">
+                                                <input class="form-check-input" type="radio" name="dryingMachine" id="floorFinish13" value="3">
                                                 <label class="form-check-label" for="floorFinish13">
                                                     Premium
                                                 </label>
@@ -1032,19 +1032,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="interiorDoors1" id="interiorDoors11" value="1">
+                                                <input class="form-check-input" type="radio" name="homeCinema" id="interiorDoors11" value="1">
                                                 <label class="form-check-label" for="interiorDoors11">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="interiorDoors1" id="interiorDoors12" value="2">
+                                                <input class="form-check-input" type="radio" name="homeCinema" id="interiorDoors12" value="2">
                                                 <label class="form-check-label" for="interiorDoors12">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="interiorDoors1" id="interiorDoors13" value="3">
+                                                <input class="form-check-input" type="radio" name="homeCinema" id="interiorDoors13" value="3">
                                                 <label class="form-check-label" for="interiorDoors13">
                                                     Premium
                                                 </label>
@@ -1088,19 +1088,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="curtains1" id="curtains11" value="1">
+                                                <input class="form-check-input" type="radio" name="curtainsTulle" id="curtains11" value="1">
                                                 <label class="form-check-label" for="curtains11">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="curtains1" id="curtains12" value="2">
+                                                <input class="form-check-input" type="radio" name="curtainsTulle" id="curtains12" value="2">
                                                 <label class="form-check-label" for="curtains12">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="curtains1" id="curtains13" value="3">
+                                                <input class="form-check-input" type="radio" name="curtainsTulle" id="curtains13" value="3">
                                                 <label class="form-check-label" for="curtains13">
                                                     Premium
                                                 </label>
@@ -1144,19 +1144,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="landscaping1" id="landscaping11" value="1">
+                                                <input class="form-check-input" type="radio" name="mattressesBed" id="landscaping11" value="1">
                                                 <label class="form-check-label" for="landscaping11">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="landscaping1" id="landscaping12" value="2">
+                                                <input class="form-check-input" type="radio" name="mattressesBed" id="landscaping12" value="2">
                                                 <label class="form-check-label" for="landscaping12">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="landscaping1" id="landscaping13" value="3">
+                                                <input class="form-check-input" type="radio" name="mattressesBed" id="landscaping13" value="3">
                                                 <label class="form-check-label" for="landscaping13">
                                                     Premium
                                                 </label>
@@ -1200,19 +1200,19 @@
                                         <div>
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="landscaping2" id="landscaping21" value="1">
+                                                <input class="form-check-input" type="radio" name="phytowall" id="landscaping21" value="1">
                                                 <label class="form-check-label" for="landscaping21">
                                                     Base
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="landscaping2" id="landscaping22" value="2">
+                                                <input class="form-check-input" type="radio" name="phytowall" id="landscaping22" value="2">
                                                 <label class="form-check-label" for="landscaping22">
                                                     Recommend
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="landscaping2" id="landscaping23" value="3">
+                                                <input class="form-check-input" type="radio" name="phytowall" id="landscaping23" value="3">
                                                 <label class="form-check-label" for="landscaping23">
                                                     Premium
                                                 </label>
