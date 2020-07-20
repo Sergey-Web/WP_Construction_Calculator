@@ -64,40 +64,9 @@ class Controller
                 )
                 ->id;
 
-            $houseParams = [];
-            foreach ($house->getMainData() as $key => $item) {
-                /** @var $item IMainValues */
-                $houseParams[] = [(int)$item->getValue()];
-            }
-
-            $this->googleClientSpreadsheetService->updateValueCells(
-                $spreadsheetId,
-                $_ENV['CALC_HOUSE_PARAMS_RANGE'],
-                $houseParams
-            );
-
-            $valuesMainTypes = [];
-            foreach ($mainType->getTypes() as $key => $item) {
-                $valuesMainTypes[] = [(int) $item > 0];
-            }
-
-            $this->googleClientSpreadsheetService->updateValueCells(
-                $spreadsheetId,
-                $_ENV['CALC_MAIN_TYPES_RANGE'],
-                $valuesMainTypes
-            );
-
-            $valuesAdditional = [];
-
-            foreach ($additionalOption->getTypes() as $key => $item) {
-                $valuesAdditional[] = [(int) $item > 0];
-            }
-
-            $this->googleClientSpreadsheetService->updateValueCells(
-                $spreadsheetId,
-                $_ENV['CALC_ADDITIONAL_OPTIONS_RANGE'],
-                $valuesAdditional
-            );
+            $this->googleClientSpreadsheetService->updateMainParams($spreadsheetId, $house);
+            $this->googleClientSpreadsheetService->updateCheckBoxOptions($spreadsheetId, $mainType, $_ENV['CALC_MAIN_TYPES_RANGE']);
+            $this->googleClientSpreadsheetService->updateCheckBoxOptions($spreadsheetId, $additionalOption, $_ENV['CALC_ADDITIONAL_OPTIONS_RANGE']);
 
             $dataMainTypes = $mainType->getActiveOptions();
             $dataAdditionalOption = $additionalOption->getActiveOptions();
@@ -121,6 +90,25 @@ class Controller
                 $spreadsheetId,
                 $dataButchUpdate
             );
+
+            $resultCost = $this->googleClientSpreadsheetService
+                ->getValueCells($spreadsheetId,  $_ENV['CALC_RESULT_COST_RANGE']);
+
+            $resultDays = $this->googleClientSpreadsheetService
+                ->getValueCells($spreadsheetId,  $_ENV['CALC_RESULT_DAYS_RANGE']);
+
+            $resultPercentCompletionRange = $this->googleClientSpreadsheetService
+                ->getValueCells($spreadsheetId,  $_ENV['CALC_RESULT_PERCENT_COMPLETION_RANGE']);
+
+            $keysMainType =  array_keys($mainType->getOptions());
+
+            $result = [
+                'calcId' => $spreadsheetId,
+                'resultCost' => $this->resultMainTypes($resultCost, $keysMainType),
+                'resultDays' => $this->resultMainTypes($resultDays, $keysMainType),
+                'resultPercent' => $this->resultMainTypes($resultPercentCompletionRange,$keysMainType)
+            ];
+
         } catch (\Exception $e) {
             echo $e->getMessage();wp_die();
         }
@@ -137,5 +125,15 @@ class Controller
             echo $e->getMessage();wp_die();
         }
         echo 'ok';wp_die();
+    }
+
+    private function resultMainTypes(array $resultPercentCompletionRange, array $types): array
+    {
+        $result = [];
+        foreach ($resultPercentCompletionRange as $key => $item ) {
+            $result[$types[$key]] =  $item[0];
+        }
+
+        return $result;
     }
 }

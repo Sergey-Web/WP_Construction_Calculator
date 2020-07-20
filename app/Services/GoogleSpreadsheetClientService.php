@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Services\Options\HouseParams\IMainValues;
 use Google_Client;
 use Google_Service_Sheets;
 use Google_Service_Sheets_BatchUpdateValuesRequest;
@@ -62,5 +63,51 @@ class GoogleSpreadsheetClientService
             throw new \Exception();
         }
         return $result;
+    }
+
+
+    public function updateMainParams(string $spreadsheetId, IMainData $data): void
+    {
+        $houseParams = [];
+        foreach ($data->getData() as $key => $item) {
+            /** @var $item IMainValues */
+            $houseParams[] = [(int)$item->getValue()];
+        }
+
+        $this->updateValueCells(
+            $spreadsheetId,
+            $_ENV['CALC_HOUSE_PARAMS_RANGE'],
+            $houseParams
+        );
+    }
+
+    public function updateCheckBoxOptions(string $spreadsheetId, IOption $option, string $range): void
+    {
+        $valuesMainTypes = [];
+        foreach ($option->getTypes() as $key => $item) {
+            $valuesMainTypes[] = [(int) $item > 0];
+        }
+
+        $this->updateValueCells(
+            $spreadsheetId,
+            $range,
+            $valuesMainTypes
+        );
+    }
+
+    public function addBatchOptions(IOption $option): array
+    {
+        $data = $option->getActiveOptions();
+
+        $dataButchUpdate = [];
+
+        foreach ($data as $key => $item) {
+            $dataButchUpdate[] = [
+                'range' => $_ENV['CALC_TAB_NAME'] . (new $item)->getNameCellType(),
+                'values' => [[(int)$data[$key]]]
+            ];
+        }
+
+        return $dataButchUpdate;
     }
 }

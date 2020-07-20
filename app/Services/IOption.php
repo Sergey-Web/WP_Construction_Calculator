@@ -7,6 +7,7 @@ namespace App\Services;
 interface IOption
 {
     function getOptions(): array;
+    function getActiveOptions(): array;
     function getOptionsReceived(): array;
     function getTypes(): array;
 }

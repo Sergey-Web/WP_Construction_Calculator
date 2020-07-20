@@ -23,7 +23,7 @@ class Builder implements IBuilder
         $this->optionsReceived = $mainTypes->getOptionsReceived();
         $this->mainTypes = $mainTypes->getOptions();
         $this->additionalOptions = $additionalOptions->getOptions();
-        $this->mainData = $houseParams->getMainData();
+        $this->mainData = $houseParams->getData();
         $this->types = $mainTypes->getTypes();
     }
 

@@ -22,7 +22,7 @@ class House implements IMainData
         $this->setData($data);
     }
 
-    public function getMainData(): array
+    public function getData(): array
     {
         return $this->data;
     }

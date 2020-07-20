@@ -6,5 +6,5 @@ namespace App\Services;
 
 interface IMainData
 {
-    function getMainData(): array;
+    function getData(): array;
 }
