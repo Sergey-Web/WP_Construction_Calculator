@@ -6,9 +6,9 @@ namespace App\Services\Options\MainTypes;
 
 use App\Services\Options\Cell;
 
-class CleaningAfterBuilders extends Cell
+class InteriorDoors extends Cell
 {
-    public const ROW = 49;
+    public const ROW = 45;
 
     public function getNameCellCheckBox(): string
     {

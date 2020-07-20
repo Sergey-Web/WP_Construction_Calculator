@@ -46,13 +46,13 @@ class Director implements IDirector
         ];
     }
 
-    private function clearActiveOptions(string $spreadsheetId): void
-    {
-        $options = $this->builder->getOptions();
-        $values = array_fill(0, count($options), [false]);
-        $this->googleClientSpreadsheetService->updateValueCells($spreadsheetId, $_ENV['CALC_MAIN_TYPES_RANG'], $values);
-        $this->googleClientSpreadsheetService->updateValueCells($spreadsheetId, $_ENV['CALC_ADDITIONAL_OPTIONS_RANG'], $values);
-    }
+//    private function clearActiveOptions(string $spreadsheetId): void
+//    {
+//        $options = $this->builder->getOptions();
+//        $values = array_fill(0, count($options), [false]);
+//        $this->googleClientSpreadsheetService->updateValueCells($spreadsheetId, $_ENV['CALC_MAIN_TYPES_RANGE'], $values);
+//        $this->googleClientSpreadsheetService->updateValueCells($spreadsheetId, $_ENV['CALC_ADDITIONAL_OPTIONS_RANGE'], $values);
+//    }
 
     private function addMainData(string $spreadsheetId): void
     {

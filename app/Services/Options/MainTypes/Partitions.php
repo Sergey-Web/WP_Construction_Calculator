@@ -8,7 +8,7 @@ use App\Services\Options\Cell;
 
 class Partitions extends Cell
 {
-    public const ROW = 11;
+    public const ROW = 38;
 
     public function getNameCellCheckBox(): string
     {

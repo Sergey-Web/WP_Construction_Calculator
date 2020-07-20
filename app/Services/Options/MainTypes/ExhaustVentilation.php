@@ -8,7 +8,7 @@ use App\Services\Options\Cell;
 
 class ExhaustVentilation extends Cell
 {
-    public const ROW = 11;
+    public const ROW = 42;
 
     public function getNameCellCheckBox(): string
     {

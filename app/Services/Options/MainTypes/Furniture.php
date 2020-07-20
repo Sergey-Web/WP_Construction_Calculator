@@ -8,7 +8,7 @@ use App\Services\Options\Cell;
 
 class Furniture extends Cell
 {
-    public const ROW = 11;
+    public const ROW = 47;
 
     public function getNameCellCheckBox(): string
     {

@@ -9,5 +9,5 @@ use App\Services\Builders\Contracts\{ITypes,IOptions,IOptionsReceived,IMain};
 
 interface IBuilder extends ITypes, IOptions, IOptionsReceived, IMain
 {
-    function __construct(IMainData $data, IOption $mainType, IOption $additionalOption);
+    function __construct(IMainData $data, IOption $mainTypes, IOption $additionalOption);
 }

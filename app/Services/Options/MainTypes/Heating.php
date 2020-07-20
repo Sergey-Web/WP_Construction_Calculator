@@ -8,7 +8,7 @@ use App\Services\Options\Cell;
 
 class Heating extends Cell
 {
-    public const ROW = 11;
+    public const ROW = 36;
 
     public function getNameCellCheckBox(): string
     {

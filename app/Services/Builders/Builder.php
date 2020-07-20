@@ -8,23 +8,30 @@ use App\Services\{IMainData, IOption};
 
 class Builder implements IBuilder
 {
-    private $options;
+    private $mainTypes;
+
     private $optionsReceived;
+
     private $mainData;
+
     private $types;
 
-    public function __construct(IMainData $data, IOption $mainType, IOption $additionalOption)
+    private $additionalOptions;
+
+    public function __construct(IMainData $houseParams, IOption $mainTypes, IOption $additionalOptions)
     {
-        $this->optionsReceived = $mainType->getOptionsReceived();
-        $this->options = $mainType->getOptions();
-        $this->mainData = $data->getMainData();
-        $this->types = $mainType->getTypes();
+        $this->optionsReceived = $mainTypes->getOptionsReceived();
+        $this->mainTypes = $mainTypes->getOptions();
+        $this->additionalOptions = $additionalOptions->getOptions();
+        $this->mainData = $houseParams->getMainData();
+        $this->types = $mainTypes->getTypes();
     }
 
     public function getOptions(): array
     {
-        return $this->options;
+        return $this->mainTypes;
     }
+
 
     public function getOptionsReceived(): array
     {

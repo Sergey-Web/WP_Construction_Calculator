@@ -8,7 +8,7 @@ use App\Services\Options\Cell;
 
 class FloorDecoration extends Cell
 {
-    public const ROW = 11;
+    public const ROW = 41;
 
     public function getNameCellCheckBox(): string
     {

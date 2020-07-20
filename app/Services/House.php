@@ -14,6 +14,7 @@ class House implements IMainData
         'numberBathrooms' => Bathroom::class,
         'numberInhabitants' => Inhabitant::class,
     ];
+
     private $data;
 
     public function __construct(array $data)

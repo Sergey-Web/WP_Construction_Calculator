@@ -6,6 +6,7 @@ namespace App\Services;
 
 use Google_Client;
 use Google_Service_Sheets;
+use Google_Service_Sheets_BatchUpdateValuesRequest;
 use Google_Service_Sheets_CopySheetToAnotherSpreadsheetRequest;
 use Google_Service_Sheets_Spreadsheet;
 use Google_Service_Sheets_ValueRange;
@@ -40,6 +41,16 @@ class GoogleSpreadsheetClientService
             $body,
             $params
         );
+    }
+
+    public function updateButchValueCells(string $spreadsheetId, array $data): void
+    {
+        $body = new Google_Service_Sheets_BatchUpdateValuesRequest([
+            'valueInputOption' => 'USER_ENTERED',
+            'data' => $data
+        ]);
+
+        $this->service->spreadsheets_values->batchUpdate($spreadsheetId, $body);
     }
 
     public function getValueCells(string $spreadsheet, string $range): array

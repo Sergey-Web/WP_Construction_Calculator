@@ -60,11 +60,15 @@ class AdditionalOption implements IOption
     private $data;
 
     private $optionReceived;
+    /**
+     * @var array
+     */
+    private $optionActive;
 
     public function __construct(array $data)
     {
         $this->data = $data;
-        $this->optionReceived = $this->setOptionReceived();
+        $this->setOptionReceived();
     }
 
     public function getOptions(): array
@@ -72,18 +76,14 @@ class AdditionalOption implements IOption
         return $this->options;
     }
 
+    public function getActiveOptions(): array
+    {
+        return $this->optionActive;
+    }
+
     public function getOptionsReceived(): array
     {
         return $this->optionReceived;
-    }
-
-    private function setOptionReceived(): array
-    {
-        $data = [];
-        foreach ($this->data as $key => $item) {
-            if ((int) $item > 0) $data[$key] = $key;
-        }
-        return array_intersect_key($this->options, $data);
     }
 
     public function getTypes(): array
@@ -92,6 +92,19 @@ class AdditionalOption implements IOption
         foreach ($this->getOptionsReceived() as $key => $item) {
             $result[$key] = $this->data[$key];
         }
+
         return $result;
+    }
+
+    private function setOptionReceived(): void
+    {
+        $data = [];
+        foreach ($this->data as $key => $item) {
+            if (array_key_exists($key, $this->options) === false) continue;
+            if ((int) $item > 0) $data[$key] = $key;
+        }
+
+        $this->optionReceived = array_merge($this->options, $data);
+        $this->optionActive = array_intersect_key($this->options, $data);
     }
 }

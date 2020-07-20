@@ -8,7 +8,7 @@ use App\Services\Options\Cell;
 
 class WallDecoration extends Cell
 {
-    public const ROW = 11;
+    public const ROW = 39;
 
     public function getNameCellCheckBox(): string
     {
