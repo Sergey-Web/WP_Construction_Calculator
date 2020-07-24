@@ -91,22 +91,32 @@ class Controller
                 $dataButchUpdate
             );
 
-            $resultCost = $this->googleClientSpreadsheetService
+            $costMainType = $this->googleClientSpreadsheetService
                 ->getValueCells($spreadsheetId,  $_ENV['CALC_RESULT_COST_RANGE']);
 
-            $resultDays = $this->googleClientSpreadsheetService
+            $mainTypeDays = $this->googleClientSpreadsheetService
                 ->getValueCells($spreadsheetId,  $_ENV['CALC_RESULT_DAYS_RANGE']);
 
-            $resultPercentCompletionRange = $this->googleClientSpreadsheetService
+            $mainTypePercent = $this->googleClientSpreadsheetService
                 ->getValueCells($spreadsheetId,  $_ENV['CALC_RESULT_PERCENT_COMPLETION_RANGE']);
 
-            $keysMainType =  array_keys($mainType->getOptions());
+            $additionalOption = $this->googleClientSpreadsheetService
+                ->getValueCells($spreadsheetId,  $_ENV['REPORT_RESULT_ADDITIONAL_OPTION_RANGE']);
+
+            $keysMainType = array_keys($mainType->getOptions());
+
+            $mainTypeSum = $this->sumCells($costMainType);
+            $additionalOptionSum = $this->sumCells($additionalOption);
+            $totalCost = $mainTypeSum + $additionalOptionSum;
 
             $result = [
                 'calcId' => $spreadsheetId,
-                'resultCost' => $this->resultMainTypes($resultCost, $keysMainType),
-                'resultDays' => $this->resultMainTypes($resultDays, $keysMainType),
-                'resultPercent' => $this->resultMainTypes($resultPercentCompletionRange,$keysMainType)
+                'mainTypeCost' => $this->result($costMainType, $keysMainType),
+                'mainTypeSum' => $mainTypeSum,
+                'mainTypeDays' => $this->result($mainTypeDays, $keysMainType),
+                'mainTypePercent' => $this->result($mainTypePercent, $keysMainType),
+                'additionalOptionSum' => $additionalOptionSum,
+                'totalCost' => $totalCost
             ];
 
         } catch (\Exception $e) {
@@ -127,7 +137,7 @@ class Controller
         echo 'ok';wp_die();
     }
 
-    private function resultMainTypes(array $resultPercentCompletionRange, array $types): array
+    private function result(array $resultPercentCompletionRange, array $types): array
     {
         $result = [];
         foreach ($resultPercentCompletionRange as $key => $item ) {
@@ -135,5 +145,18 @@ class Controller
         }
 
         return $result;
+    }
+
+    private function sumCells(array $data): int
+    {
+        $sum = 0;
+
+        foreach ($data as $i) {
+            if (!empty($i[0]) && $i[0] > 0) {
+                $sum += preg_replace('/[^0-9]/', '', $i[0]);
+            }
+        }
+
+        return $sum;
     }
 }
