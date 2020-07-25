@@ -119,7 +119,7 @@ class Controller
                 'mainTypePercent' => $this->result($mainTypePercent, $keysMainType),
                 'additionalOptionSum' => $additionalOptionSum,
                 'totalDays' => DateTimeService::getMonthDate($this->sumCells($mainTypeDays)),
-                'totalCost' => $totalCost
+                'totalCost' => NumericService::costSeparator($totalCost, ' ')
             ];
 
         } catch (\Exception $e) {
