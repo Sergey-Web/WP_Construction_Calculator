@@ -117,9 +117,9 @@ class Controller
                 'mainTypeSum' => NumericService::costSeparator($mainTypeSum, ' '),
                 'mainTypeDays' => $this->result($mainTypeDays, $keysMainType),
                 'mainTypePercent' => $this->result($mainTypePercent, $keysMainType),
-                'additionalOptionSum' => $additionalOptionSum,
+                'additionalOptionSum' => NumericService::costSeparator($additionalOptionSum,' '),
                 'totalDays' => DateTimeService::getMonthDate($this->sumCells($mainTypeDays)),
-                'totalCost' => NumericService::costSeparator($totalCost, ' ')
+                'totalCost' => NumericService::costSeparator($totalCost, ' '),
             ];
 
         } catch (\Exception $e) {
