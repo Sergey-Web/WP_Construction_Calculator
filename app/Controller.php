@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App;
 
 use App\Services\AdditionalOption;
+use App\Services\DateTimeService;
 use App\Services\Director;
 use App\Services\GoogleDriveClientService;
 use App\Services\GoogleSpreadsheetClientService;
 use App\Services\House;
 use App\Services\Builders\Builder;
 use App\Services\MainType;
+use App\Services\NumericService;
 use App\Services\Options\HouseParams\IMainValues;
 use App\Services\Report\ReportService;
 use App\Services\ValidationService;
@@ -112,10 +114,11 @@ class Controller
             $result = [
                 'calcId' => $spreadsheetId,
                 'mainTypeCost' => $this->result($costMainType, $keysMainType),
-                'mainTypeSum' => $mainTypeSum,
+                'mainTypeSum' => NumericService::costSeparator($mainTypeSum, ' '),
                 'mainTypeDays' => $this->result($mainTypeDays, $keysMainType),
                 'mainTypePercent' => $this->result($mainTypePercent, $keysMainType),
                 'additionalOptionSum' => $additionalOptionSum,
+                'totalDays' => DateTimeService::getMonthDate($this->sumCells($mainTypeDays)),
                 'totalCost' => $totalCost
             ];
 
