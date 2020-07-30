@@ -67,17 +67,25 @@ class Controller
                 ->id;
 
             $this->googleClientSpreadsheetService->updateMainParams($spreadsheetId, $house);
-            $this->googleClientSpreadsheetService->updateCheckBoxOptions($spreadsheetId, $mainType, $_ENV['CALC_MAIN_TYPES_RANGE']);
+            $this->googleClientSpreadsheetService->updateCheckBoxRequireOptions($spreadsheetId, $mainType, $_ENV['CALC_MAIN_TYPES_RANGE']);
             $this->googleClientSpreadsheetService->updateCheckBoxOptions($spreadsheetId, $additionalOption, $_ENV['CALC_ADDITIONAL_OPTIONS_RANGE']);
 
-            $dataMainTypes = $mainType->getActiveOptions();
+            $dataMainTypesActive = $mainType->getActiveOptions();
+            $dataMainTypesInactive = $mainType->getInactiveOptions();
             $dataAdditionalOption = $additionalOption->getActiveOptions();
             $dataButchUpdate = [];
 
-            foreach ($dataMainTypes as $key => $item) {
+            foreach ($dataMainTypesActive as $key => $item) {
                 $dataButchUpdate[] = [
                     'range' => $_ENV['CALC_TAB_NAME'] . (new $item)->getNameCellType(),
                         'values' => [[(int)$data[$key]]]
+                ];
+            }
+
+            foreach ($dataMainTypesInactive as $key => $item) {
+                $dataButchUpdate[] = [
+                    'range' => $_ENV['CALC_TAB_NAME'] . (new $item)->getNameCellType(),
+                    'values' => [[1]]
                 ];
             }
 
@@ -114,6 +122,7 @@ class Controller
             $result = [
                 'calcId' => $spreadsheetId,
                 'mainTypeCost' => $this->result($costMainType, $keysMainType),
+                'mainTypeCostInactive' => array_keys($dataMainTypesInactive),
                 'mainTypeSum' => NumericService::costSeparator($mainTypeSum, ' '),
                 'mainTypeDays' => $this->result($mainTypeDays, $keysMainType),
                 'mainTypePercent' => $this->result($mainTypePercent, $keysMainType),

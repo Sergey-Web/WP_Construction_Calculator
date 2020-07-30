@@ -8,10 +8,7 @@ use App\Services\Options\HouseParams\IMainValues;
 use Google_Client;
 use Google_Service_Sheets;
 use Google_Service_Sheets_BatchUpdateValuesRequest;
-use Google_Service_Sheets_CopySheetToAnotherSpreadsheetRequest;
-use Google_Service_Sheets_Spreadsheet;
 use Google_Service_Sheets_ValueRange;
-use Unirest\Exception;
 
 class GoogleSpreadsheetClientService
 {
@@ -78,6 +75,20 @@ class GoogleSpreadsheetClientService
             $spreadsheetId,
             $_ENV['CALC_HOUSE_PARAMS_RANGE'],
             $houseParams
+        );
+    }
+
+    public function updateCheckBoxRequireOptions(string $spreadsheetId, IOption $option, string $range): void
+    {
+        $valuesMainTypes = [];
+        foreach ($option->getTypes() as $key => $item) {
+            $valuesMainTypes[] = [true];
+        }
+
+        $this->updateValueCells(
+            $spreadsheetId,
+            $range,
+            $valuesMainTypes
         );
     }
 

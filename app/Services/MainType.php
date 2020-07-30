@@ -48,10 +48,16 @@ class MainType implements IOption
     private $data;
 
     private $optionReceived;
+
     /**
      * @var array
      */
     private $optionActive;
+
+    /**
+     * @var array
+     */
+    private $optionInactive;
 
     public function __construct(array $data)
     {
@@ -67,6 +73,11 @@ class MainType implements IOption
     public function getActiveOptions(): array
     {
         return $this->optionActive;
+    }
+
+    public function getInactiveOptions(): array
+    {
+        return $this->optionInactive;
     }
 
     public function getOptionsReceived(): array
@@ -94,5 +105,6 @@ class MainType implements IOption
 
         $this->optionReceived = array_merge($this->options, $data);
         $this->optionActive = array_intersect_key($this->options, $data);
+        $this->optionInactive = array_diff_key($this->options, $data);
     }
 }
