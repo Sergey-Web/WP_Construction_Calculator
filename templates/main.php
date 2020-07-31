@@ -1246,7 +1246,7 @@
                 Осн. процессы
               </div>
               <div class="section-price calc-apart__cost-eco">
-                <span>10 219 625</span>$
+                <span id="sumProcceses">0</span>$
               </div>
               <!-- <div class="section-time">24 мес 17 д</div> -->
             </div>
@@ -1257,7 +1257,7 @@
                 Доп. опции
               </div>
               <div class="section-price calc-apart__cost-eco">
-                <span>219 625</span>$
+                <span id="sumOptions">0</span>$
               </div>
               <!-- <div class="section-time">24 мес 17 д</div> -->
             </div>
@@ -1268,9 +1268,9 @@
                 Итого
               </div>
               <div class="section-price title-totalprice calc-apart__cost-eco">
-                <span>219 625</span>$
+                <span id="sumTotal">0</span>$
               </div>
-              <div class="section-time">24 мес 17 д</div>
+              <div class="section-time"><span id="sumMonths">0</span> мес <span id="sumDays">0</span> д</div>
             </div>
           </div>
         </div>     

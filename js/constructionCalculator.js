@@ -38,13 +38,18 @@ jQuery(document).ready(function () {
     });
 
     function HighchartsApart(dataCalc) {
-      $.each(dataCalc.resultCost,function(index, value){
+      $.each(dataCalc.mainTypeCost,function(index, value){
           $('#'+index+'_data .calc-apart-param__cost-text').html(value+'$');
       });
-      $.each(dataCalc.resultDays,function(index, value){
+      $.each(dataCalc.mainTypeDays,function(index, value){
           $('#'+index+'_data .calc-apart__current-days').val(value);
           $('#'+index+'_data .calc-apart__number-save-days').val(value/100);
       });
+      $('#sumProcceses').html(dataCalc.mainTypeSum);
+      $('#sumOptions').html(dataCalc.additionalOptionSum);
+      $('#sumTotal').html(dataCalc.totalCost);
+      $('#sumMonths').html(dataCalc.totalDays['months']);
+      $('#sumDays').html(dataCalc.totalDays['days']);
 
       var $headerTimeLine = [],
           $bodyTimeLine = [],
