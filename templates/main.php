@@ -1243,7 +1243,7 @@
           <div class="col-md-4">
             <div class="class-result first">
               <div class="section-title">
-                Осн. процессы
+                Основные виды работ
               </div>
               <div class="section-price calc-apart__cost-eco">
                 <span id="sumProcceses">0</span>$
@@ -1254,7 +1254,7 @@
           <div class="col-md-4">
             <div class="class-result first">
               <div class="section-title">
-                Доп. опции
+                Дополнительные опции
               </div>
               <div class="section-price calc-apart__cost-eco">
                 <span id="sumOptions">0</span>$
@@ -1270,7 +1270,8 @@
               <div class="section-price title-totalprice calc-apart__cost-eco">
                 <span id="sumTotal">0</span>$
               </div>
-              <div class="section-time"><span id="sumMonths">0</span> мес <span id="sumDays">0</span> д</div>
+                Срок реализации
+              <div class="section-time"><span id="sumMonths">0</span> месяцев и <span id="sumDays">0</span> дня</div>
             </div>
           </div>
         </div>     
