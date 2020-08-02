@@ -8,7 +8,7 @@ use App\Services\Options\Cell;
 
 class InteriorDoors extends Cell
 {
-    public const ROW = 45;
+    public const ROW = 44;
 
     public function getNameCellCheckBox(): string
     {
