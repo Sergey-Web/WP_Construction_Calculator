@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Services\AdditionalOption;
+use App\Services\CellService;
 use App\Services\DateTimeService;
 use App\Services\Director;
 use App\Services\GoogleDriveClientService;
@@ -114,9 +115,8 @@ class Controller
                 ->getValueCells($spreadsheetId,  $_ENV['REPORT_RESULT_ADDITIONAL_OPTION_RANGE']);
 
             $keysMainType = array_keys($mainType->getOptions());
-
-            $mainTypeSum = $this->sumCells($costMainType);
-            $additionalOptionSum = $this->sumCells($additionalOption);
+            $mainTypeSum = CellService::sumActiveOption($costMainType, $data, $keysMainType);
+            $additionalOptionSum = CellService::sumCells($additionalOption);
             $totalCost = $mainTypeSum + $additionalOptionSum;
 
             $result = [
@@ -127,7 +127,7 @@ class Controller
                 'mainTypeDays' => $this->result($mainTypeDays, $keysMainType),
                 'mainTypePercent' => $this->result($mainTypePercent, $keysMainType),
                 'additionalOptionSum' => NumericService::costSeparator($additionalOptionSum,' '),
-                'totalDays' => DateTimeService::getMonthDate($this->sumCells($mainTypeDays)),
+                'totalDays' => DateTimeService::getMonthDate(CellService::sumCells($mainTypeDays)),
                 'totalCost' => NumericService::costSeparator($totalCost, ' '),
             ];
 
@@ -157,19 +157,5 @@ class Controller
         }
 
         return $result;
-    }
-
-    private function sumCells(array $data): int
-    {
-        $sum = 0;
-
-        foreach ($data as $i) {
-            if (!empty($i[0]) && $i[0] > 0) {
-                $sum += preg_replace('/[^0-9]/', '', $i[0]);
-            }
-        }
-        sleep(2);
-
-        return $sum;
     }
 }

@@ -10,4 +10,9 @@ class NumericService
     {
         return preg_replace('/(?<=\d)(?=(\d{3})+$)/', $separator, $cost);
     }
+
+    public static function getNum(string $num): int
+    {
+        return (int) preg_replace('/[^0-9]/', '', $num);
+    }
 }
