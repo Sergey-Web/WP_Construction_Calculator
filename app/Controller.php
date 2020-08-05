@@ -118,11 +118,9 @@ class Controller
             $keysMainType = array_keys($mainType->getOptions());
 
             $costMainTypesActive = CellService::getDataActiveOptions($costMainType, $data, $keysMainType);
-            $dayMainTypesActive = CellService::getDataActiveOptions($mainTypeDays, $data, $keysMainType);
-            $percentMainTypesActive = CellService::getDataActiveOptions($mainTypePercent, $data, $keysMainType);
-            $dateOffsetFromParallelJobs = DateTimeService::daysOffsetFromParallelJobs($dayMainTypesActive, $percentMainTypesActive);
+            $dateOffsetFromParallelJobs = DateTimeService::daysOffsetFromParallelJobs($mainTypeDays, $mainTypePercent);
             $mainTypeCostSum = CellService::sumCells($costMainTypesActive);
-            $mainTypeDaysSum = ceil(CellService::sumCells($dayMainTypesActive) - $dateOffsetFromParallelJobs);
+            $mainTypeDaysSum = ceil(CellService::sumCells($mainTypeDays) - $dateOffsetFromParallelJobs);
             $additionalOptionSum = CellService::sumCells($additionalOption);
             $totalCost = $mainTypeCostSum + $additionalOptionSum;
 
