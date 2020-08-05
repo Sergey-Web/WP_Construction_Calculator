@@ -14,6 +14,7 @@ use App\Services\House;
 use App\Services\Builders\Builder;
 use App\Services\MainType;
 use App\Services\NumericService;
+use App\Services\Options\Cell;
 use App\Services\Options\HouseParams\IMainValues;
 use App\Services\Report\ReportService;
 use App\Services\ValidationService;
@@ -71,12 +72,12 @@ class Controller
             $this->googleClientSpreadsheetService->updateCheckBoxRequireOptions($spreadsheetId, $mainType, $_ENV['CALC_MAIN_TYPES_RANGE']);
             $this->googleClientSpreadsheetService->updateCheckBoxOptions($spreadsheetId, $additionalOption, $_ENV['CALC_ADDITIONAL_OPTIONS_RANGE']);
 
-            $dataMainTypesActive = $mainType->getActiveOptions();
+            $activeTypes = $mainType->getActiveOptions();
             $dataMainTypesInactive = $mainType->getInactiveOptions();
             $dataAdditionalOption = $additionalOption->getActiveOptions();
             $dataButchUpdate = [];
 
-            foreach ($dataMainTypesActive as $key => $item) {
+            foreach ($activeTypes as $key => $item) {
                 $dataButchUpdate[] = [
                     'range' => $_ENV['CALC_TAB_NAME'] . (new $item)->getNameCellType(),
                         'values' => [[(int)$data[$key]]]
@@ -115,19 +116,25 @@ class Controller
                 ->getValueCells($spreadsheetId,  $_ENV['REPORT_RESULT_ADDITIONAL_OPTION_RANGE']);
 
             $keysMainType = array_keys($mainType->getOptions());
-            $mainTypeSum = CellService::sumActiveOption($costMainType, $data, $keysMainType);
+
+            $costMainTypesActive = CellService::getDataActiveOptions($costMainType, $data, $keysMainType);
+            $dayMainTypesActive = CellService::getDataActiveOptions($mainTypeDays, $data, $keysMainType);
+            $percentMainTypesActive = CellService::getDataActiveOptions($mainTypePercent, $data, $keysMainType);
+            $dateOffsetFromParallelJobs = DateTimeService::daysOffsetFromParallelJobs($dayMainTypesActive, $percentMainTypesActive);
+            $mainTypeCostSum = CellService::sumCells($costMainTypesActive);
+            $mainTypeDaysSum = ceil(CellService::sumCells($dayMainTypesActive) - $dateOffsetFromParallelJobs);
             $additionalOptionSum = CellService::sumCells($additionalOption);
-            $totalCost = $mainTypeSum + $additionalOptionSum;
+            $totalCost = $mainTypeCostSum + $additionalOptionSum;
 
             $result = [
                 'calcId' => $spreadsheetId,
                 'mainTypeCost' => $this->result($costMainType, $keysMainType),
                 'mainTypeCostInactive' => array_keys($dataMainTypesInactive),
-                'mainTypeSum' => NumericService::costSeparator($mainTypeSum, ' '),
+                'mainTypeSum' => NumericService::costSeparator($mainTypeCostSum, ' '),
                 'mainTypeDays' => $this->result($mainTypeDays, $keysMainType),
                 'mainTypePercent' => $this->result($mainTypePercent, $keysMainType),
                 'additionalOptionSum' => NumericService::costSeparator($additionalOptionSum,' '),
-                'totalDays' => DateTimeService::getMonthDate(CellService::sumCells($mainTypeDays)),
+                'totalDays' => DateTimeService::getMonthDate($mainTypeDaysSum),
                 'totalCost' => NumericService::costSeparator($totalCost, ' '),
             ];
 

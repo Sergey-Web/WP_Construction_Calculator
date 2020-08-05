@@ -17,32 +17,22 @@ class CellService
                 $sum += NumericService::getNum($i[0]);
             }
         }
-//        sleep(2);
 
         return $sum;
     }
 
-    public static function sumActiveOption(array $data, array $activeOptions, array $options): int
+
+    public static function getDataActiveOptions(array $data, array $activeOptions, array $options): array
     {
         if (count($data) !== count($options)) throw new Exception('The amount of data does not match');
 
         $res = [];
 
         foreach ($data as $key => $i) {
-            $res[$options[$key]] = $i[0];
+            $res[$options[$key]] = $i;
         }
 
-        $activeData = array_intersect_key($res, $activeOptions);
-
-        $sum = 0;
-
-        foreach ($activeData as $i) {
-            if (!empty($i) && $i > 0) {
-                $sum += NumericService::getNum($i);
-            }
-        }
-
-        return $sum;
+        return array_intersect_key($res, $activeOptions);
     }
 
 }
