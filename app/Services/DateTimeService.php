@@ -13,16 +13,33 @@ class DateTimeService
         return ['months' => $m, 'days' => $d];
     }
 
-    public static function daysOffsetFromParallelJobs(array $days, array $percentageParallelJobs): float
+    public static function sumDaysOffsetFromParallelJobs(array $days, array $percentageParallelJobs): float
     {
         $daysOffset = 0;
 
+        array_pop($days);
+        array_shift($percentageParallelJobs);
+
         foreach ($days as $k => $v) {
-            if ($v[0] !== "0") {
-                $daysOffset += $v[0] - ($v[0] * (((int) $percentageParallelJobs[$k][0]) / 100));
-            }
+            $daysOffset += $v[0] * (((int) $percentageParallelJobs[$k][0]) / 100);
         }
 
         return $daysOffset;
+    }
+
+    public static function daysOffsetFromParallelJobs(array $days, array $percentageParallelJobs, $keysMainType): array
+    {
+        $daysOffset = 0;
+        $res = [$keysMainType[$daysOffset] => 0];
+
+        array_pop($days);
+        array_shift($percentageParallelJobs);
+
+        foreach ($days as $k => $v) {
+            $daysOffset += $v[0] * (((int) $percentageParallelJobs[$k][0]) / 100);
+            $res[$keysMainType[$k+1]] = round($daysOffset);
+        }
+
+        return $res;
     }
 }
