@@ -75,9 +75,9 @@ jQuery(document).ready(function () {
           var $cuyrrentDays = parseFloat($(element).find('.calc-apart__current-days').val()),
               $cuyrrentName = $(element).find('.calc-apart__name').val(),
               $shiftDays = parseFloat($(element).find('.calc-apart__days-shift').val());
-          $cuyrrentDays = Math.round($cuyrrentDays);
-            $bodyTimeLine.push({low: $cuyrrentDays+$shiftDays, high: $shiftDays, count: $cuyrrentDays, color: colorChartsLine});
-            $headerTimeLine.push([$cuyrrentName + ', ' + $(element).find('.calc-apart-param__cost-text').text()]);
+              $cuyrrentDays = Math.round($cuyrrentDays);
+              $bodyTimeLine.push({low: $shiftDays, high: $cuyrrentDays+$shiftDays, count: $cuyrrentDays, color: colorChartsLine});
+              $headerTimeLine.push([$cuyrrentName + ', ' + $(element).find('.calc-apart-param__cost-text').text()]);
         }
 
         if ($('.calc-apart__quality-level[name="calc-apart__quality-level"] option:checked').val() == 1){
@@ -90,7 +90,7 @@ jQuery(document).ready(function () {
         if ($index >= 16)
           return false;
       });
-
+console.log($bodyTimeLine);
       var $chartsTotalPrice = 0,
           $chartsRadioQualityVal = $('.calc-apart__quality-level[name="calc-apart__quality-level"] option:checked').val(),
           $chartsRadioClassVal = $('.calc-apart__class-level[name="calc-apart__class-level"]:checked').val();
