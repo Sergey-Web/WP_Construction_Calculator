@@ -10,7 +10,6 @@ jQuery(document).ready(function () {
            values[field.name] = field.value;
        });
        values.action = 'constructionCalculator';
-       console.log(values);
        $.ajax(constructionCalculator.ajaxUrl, {
            type: 'POST',
            data: values,
@@ -50,10 +49,8 @@ jQuery(document).ready(function () {
           $('#'+index+'_data .calc-apart__current-days').val(value);
           $('#'+index+'_data .calc-apart__number-save-days').val(value/100);
       });
-      $.each(dataCalc.mainTypePercent,function(index, value){
-          var val = /*parseFloat(dataCalc.mainTypeDays[index]) + */(parseFloat(dataCalc.mainTypeDays[index]) / 100 * parseFloat(value));
-          console.log(dataCalc.mainTypeDays[index]+" "+parseFloat(value)+" "+val);
-          $('#'+index+'_data .calc-apart__days-shift').val(parseInt(val));
+      $.each(dataCalc.shiftDaysParallelJobs,function(index, value){
+          $('#'+index+'_data .calc-apart__days-shift').val(parseInt(value));
       });
       $('#sumProcceses').html(dataCalc.mainTypeSum);
       $('#sumOptions').html(dataCalc.additionalOptionSum);
@@ -63,9 +60,6 @@ jQuery(document).ready(function () {
 
       var $headerTimeLine = [],
           $bodyTimeLine = [],
-          $startTime = 0,
-          $endTime = 0,
-          timeLineId = 0,
           colorChartsLine = '',
           inputQualityVal = $('.calc-apart__quality-level[name=calc-apart__quality-level] option:checked').val();
 
@@ -77,24 +71,13 @@ jQuery(document).ready(function () {
         } else{
           colorChartsLine = '#F1F1F1';
         }
-        // colorChartsLine =  '#F47955';
-
-        // if (colorChartsLine == '#F47955')
         if (!(inputQualityVal == 1 && $(element).hasClass('only-capital'))) {
           var $cuyrrentDays = parseFloat($(element).find('.calc-apart__current-days').val()),
               $cuyrrentName = $(element).find('.calc-apart__name').val(),
-              $saveDays = parseFloat($(element).find('.calc-apart__number-save-days').val()),
               $shiftDays = parseFloat($(element).find('.calc-apart__days-shift').val());
           $cuyrrentDays = Math.round($cuyrrentDays);
-
-          $endTime = $endTime + $cuyrrentDays;
-          $bodyTimeLine.push({low: $startTime, high: $endTime, count: $cuyrrentDays, color: colorChartsLine});
-          $endTime = $endTime - $saveDays;
-          $startTime = $endTime;
-          $headerTimeLine.push([$cuyrrentName + ', ' + $(element).find('.calc-apart-param__cost-text').text()]);
-
-          $startTime += $shiftDays;
-          $endTime += $shiftDays;
+            $bodyTimeLine.push({low: $cuyrrentDays+$shiftDays, high: $shiftDays, count: $cuyrrentDays, color: colorChartsLine});
+            $headerTimeLine.push([$cuyrrentName + ', ' + $(element).find('.calc-apart-param__cost-text').text()]);
         }
 
         if ($('.calc-apart__quality-level[name="calc-apart__quality-level"] option:checked').val() == 1){
@@ -107,8 +90,6 @@ jQuery(document).ready(function () {
         if ($index >= 16)
           return false;
       });
-
-      // console.log($bodyTimeLine);
 
       var $chartsTotalPrice = 0,
           $chartsRadioQualityVal = $('.calc-apart__quality-level[name="calc-apart__quality-level"] option:checked').val(),
