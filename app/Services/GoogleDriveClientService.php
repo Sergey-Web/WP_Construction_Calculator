@@ -36,7 +36,7 @@ class GoogleDriveClientService
        return $this->service->files->export($reportSpreadsheetId, 'application/pdf', ['alt' => 'media']);
     }
 
-    public function copyFile(string $originFileId, int $copyTitle): Google_Service_Drive_DriveFile
+    public function copyFile(string $originFileId, string $copyTitle): Google_Service_Drive_DriveFile
     {
         $fileMetadata = new Google_Service_Drive_DriveFile([
                 'name' => $copyTitle,

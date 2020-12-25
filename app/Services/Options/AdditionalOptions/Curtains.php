@@ -9,19 +9,4 @@ use App\Services\Options\Cell;
 class Curtains extends Cell
 {
     public const ROW = 28;
-
-    public function getNameCellCheckBox(): string
-    {
-        return static::CHECKBOX . static::ROW;
-    }
-
-    public function getNameCellType(): string
-    {
-        return static::CELL_TYPE . static::ROW;
-    }
-
-    public function getNameCellResult(): string
-    {
-        return static::CELL_RESULT . static::ROW;
-    }
 }

@@ -12,11 +12,25 @@ abstract class Cell
 
     const CELL_TYPE = 'F';
 
-    abstract function getNameCellResult(): string;
+    const CELL_MAIN_ACTIVE = 'M';
 
+    public function getNameCellCheckBox(): string
+    {
+        return static::CHECKBOX . static::ROW;
+    }
 
-    abstract function getNameCellType(): string;
+    public function getNameCellType(): string
+    {
+        return static::CELL_TYPE . static::ROW;
+    }
 
+    public function getNameCellResult(): string
+    {
+        return static::CELL_RESULT . static::ROW;
+    }
 
-    abstract function getNameCellCheckBox(): string;
+    public function getNameCellMainActive(): string
+    {
+        return static::CELL_MAIN_ACTIVE . static::ROW;
+    }
 }

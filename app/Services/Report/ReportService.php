@@ -6,6 +6,7 @@ namespace App\Services\Report;
 
 use App\Services\GoogleDriveClientService;
 use App\Services\GoogleSpreadsheetClientService;
+use DateTime;
 
 class ReportService
 {
@@ -28,10 +29,10 @@ class ReportService
     public function save(array $data): void
     {
         $reportSpreadsheetId = $this->copySpreadsheet($_ENV['REPORT_SPREADSHEET_ID']);
-        $this->saveResult($reportSpreadsheetId, $_ENV['REPORT_RESULT_COST_RANGE'], array_values($data['resultCost']));
-        $this->saveResult($reportSpreadsheetId, $_ENV['REPORT_RESULT_DAYS_RANGE'], array_values($data['resultDays']));
-        $this->saveResult($reportSpreadsheetId, $_ENV['REPORT_RESULT_PERCENT_COMPLETION_RANGE'], array_values($data['resultPercent']));
-        $fileName = $this->createFilePdf($reportSpreadsheetId, $data['email']);
+        $this->saveResult($reportSpreadsheetId, $_ENV['REPORT_RESULT_COST_RANGE'], array_values($data['mainTypeCost']));
+        $this->saveResult($reportSpreadsheetId, $_ENV['REPORT_RESULT_DAYS_RANGE'], array_values($data['mainTypeDays']));
+        $this->saveResult($reportSpreadsheetId, $_ENV['REPORT_RESULT_PERCENT_COMPLETION_RANGE'], array_values($data['mainTypePercent']));
+        $fileName = $this->createFilePdf($reportSpreadsheetId, $data['fileName'], $data['email']);
         $pdfId = $this->uploadFile($fileName);
         $this->shareFile($pdfId, $data['email']);
         unlink(static::PATH_DIR_UPLOADS . $fileName);
@@ -41,11 +42,12 @@ class ReportService
     {
         return $this->googleDriveClientService->uploadFile($fileName, static::PATH_DIR_UPLOADS);
     }
-    private function createFilePdf(string $reportSpreadsheetId, string $email): string
+    private function createFilePdf(string $reportSpreadsheetId, string $name, string $email): string
     {
-        $fileName = $email .'_'. (new \DateTime)->format('Y-m-d_h_i_s').'.pdf';
+        $fileName = $email .'__'. $name.'pdf';
         $content = $this->googleDriveClientService->exportFile($reportSpreadsheetId);
         file_put_contents(static::PATH_DIR_UPLOADS . $fileName, $content->getBody()->getContents());
+
         return $fileName;
     }
 
@@ -75,7 +77,7 @@ class ReportService
         return $this->googleDriveClientService
             ->copyFile(
                 $spreadsheetId,
-                (new \DateTime())->getTimestamp()
+                (new DateTime)->format('Y-m-d_h_i_s')
             )
             ->id;
     }

@@ -18,16 +18,20 @@ class ValidationService
         foreach ($this->requiredData as $item) {
             if (array_key_exists($item, $data) === false) $result = false;
         }
+
         return $result;
     }
 
     public function checkRequiredReportId(array $data): bool
     {
         $result = true;
-        if (empty($data['email'])) $result = 'false';
-        if (empty($data['resultCost'])) $result = false;
-        if (empty($data['resultDays'])) $result = false;
-        if (empty($data['resultPercent'])) $result = false;
+
+        if (empty($data['fileName'])) $result = false;
+        if (empty($data['email'])) $result = false;
+        if (empty($data['mainTypeCost'])) $result = false;
+        if (empty($data['mainTypeDays'])) $result = false;
+        if (empty($data['mainTypePercent'])) $result = false;
+
         return $result;
     }
 
@@ -50,6 +54,7 @@ class ValidationService
         } catch (\Exception $e) {
             $result = false;
         }
+
         return $result;
     }
 }

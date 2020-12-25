@@ -60,11 +60,12 @@ class Controller
             $house = new House($data);
             $mainType = new MainType($data);
             $additionalOption = new AdditionalOption($data);
+            $googleFileName = (new \DateTime)->format('Y-m-d_h_i_s');
 
             $spreadsheetId = $this->googleDriveClientService
                 ->copyFile(
                     $_ENV['CALC_SPREADSHEET_ID'],
-                    (new \DateTime())->getTimestamp()
+                    $googleFileName
                 )
                 ->id;
 
@@ -80,7 +81,14 @@ class Controller
             foreach ($activeTypes as $key => $item) {
                 $dataButchUpdate[] = [
                     'range' => $_ENV['CALC_TAB_NAME'] . (new $item)->getNameCellType(),
-                        'values' => [[(int)$data[$key]]]
+                    'values' => [[(int)$data[$key]]]
+                ];
+            }
+
+            foreach ($activeTypes as $key => $item) {
+                $dataButchUpdate[] = [
+                    'range' => $_ENV['CALC_TAB_NAME'] . (new $item)->getNameCellMainActive(),
+                    'values' => [['TRUE']]
                 ];
             }
 
@@ -126,6 +134,7 @@ class Controller
 
             $result = [
                 'calcId' => $spreadsheetId,
+                'fileName' => $googleFileName,
                 'mainTypeCost' => $this->result($costMainType, $keysMainType),
                 'mainTypeCostInactive' => array_keys($dataMainTypesInactive),
                 'mainTypeSum' => NumericService::costSeparator($mainTypeCostSum, ' '),
@@ -150,6 +159,7 @@ class Controller
             if (!$this->validation->checkRequiredReportId($data)) throw new \Exception('error validation report');
             (new ReportService())->save($data);
         } catch (\Exception $e) {
+
             echo $e->getMessage();wp_die();
         }
         echo 'ok';wp_die();
