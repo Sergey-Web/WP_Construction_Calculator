@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class CleaningAfterBuilders extends Cell
 {
     public const ROW = 49;
-
-
 }

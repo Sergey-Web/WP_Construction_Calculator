@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class Partitions extends Cell
 {
     public const ROW = 38;
-
-
 }

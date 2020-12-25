@@ -126,11 +126,12 @@ class Controller
             $keysMainType = array_keys($mainType->getOptions());
 
             $costMainTypesActive = CellService::getDataActiveOptions($costMainType, $data, $keysMainType);
-            $dateOffsetFromParallelJobs = DateTimeService::sumDaysOffsetFromParallelJobs($mainTypeDays, $mainTypePercent);
             $mainTypeCostSum = CellService::sumCells($costMainTypesActive);
-            $mainTypeDaysSum = ceil(CellService::sumCells($mainTypeDays) - $dateOffsetFromParallelJobs);
             $additionalOptionSum = CellService::sumCells($additionalOption);
             $totalCost = $mainTypeCostSum + $additionalOptionSum;
+            $shiftDaysParallelJobs = DateTimeService::daysOffsetFromParallelJobs($mainTypeDays, $mainTypePercent, $keysMainType);
+            $mainDays = $this->result($mainTypeDays, $keysMainType);
+            $totalDays = DateTimeService::sumDaysOffsetFromParallelJobs($mainDays, $shiftDaysParallelJobs);
 
             $result = [
                 'calcId' => $spreadsheetId,
@@ -138,12 +139,12 @@ class Controller
                 'mainTypeCost' => $this->result($costMainType, $keysMainType),
                 'mainTypeCostInactive' => array_keys($dataMainTypesInactive),
                 'mainTypeSum' => NumericService::costSeparator($mainTypeCostSum, ' '),
-                'mainTypeDays' => $this->result($mainTypeDays, $keysMainType),
+                'mainTypeDays' => $mainDays,
                 'mainTypePercent' => $this->result($mainTypePercent, $keysMainType),
                 'additionalOptionSum' => NumericService::costSeparator($additionalOptionSum,' '),
-                'totalDays' => DateTimeService::getMonthDate($mainTypeDaysSum),
+                'shiftDaysParallelJobs' => $shiftDaysParallelJobs,
                 'totalCost' => NumericService::costSeparator($totalCost, ' '),
-                'shiftDaysParallelJobs' => DateTimeService::daysOffsetFromParallelJobs($mainTypeDays, $mainTypePercent, $keysMainType),
+                'totalDays' => DateTimeService::getMonthDate($totalDays),
             ];
 
         } catch (\Exception $e) {

@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class FloorDecoration extends Cell
 {
     public const ROW = 41;
-
-
 }

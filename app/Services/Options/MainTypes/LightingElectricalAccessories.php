@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class LightingElectricalAccessories extends Cell
 {
     public const ROW = 46;
-
-
 }

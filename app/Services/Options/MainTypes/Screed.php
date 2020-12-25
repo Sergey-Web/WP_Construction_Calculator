@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class Screed extends Cell
 {
     public const ROW = 37;
-
-
 }

@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class EngineeringNetworkProject extends Cell
 {
     public const ROW = 34;
-
-
 }

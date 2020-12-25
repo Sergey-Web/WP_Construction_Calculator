@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class Furniture extends Cell
 {
     public const ROW = 47;
-
-
 }

@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class InteriorDoors extends Cell
 {
     public const ROW = 44;
-
-
 }

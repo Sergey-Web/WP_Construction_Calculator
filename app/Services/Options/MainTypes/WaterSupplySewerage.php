@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class WaterSupplySewerage extends Cell
 {
     public const ROW = 35;
-
-
 }

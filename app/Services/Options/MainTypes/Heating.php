@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class Heating extends Cell
 {
     public const ROW = 36;
-
-
 }

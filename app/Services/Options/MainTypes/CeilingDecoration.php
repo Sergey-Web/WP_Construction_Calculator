@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class CeilingDecoration extends Cell
 {
     public const ROW = 40;
-
-
 }

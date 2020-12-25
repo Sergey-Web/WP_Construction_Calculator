@@ -9,6 +9,4 @@ use App\Services\Options\Cell;
 class Conditioning extends Cell
 {
     public const ROW = 43;
-
-
 }
