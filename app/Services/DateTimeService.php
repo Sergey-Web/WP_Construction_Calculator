@@ -6,19 +6,22 @@ namespace App\Services;
 
 class DateTimeService
 {
-    public static function getMonthDate(float $d): array
+    public static function getMonthDate(int $numWorkDays): array
     {
-        for ($m = 0; $d > 30; $d -= 30, $m++) {}
+        $days = $numWorkDays;
 
-        return ['months' => $m, 'days' => $d];
+        for ($mounts = 0; $days >= 30; $mounts++) {
+            $days -= 30;
+        }
+
+        return ['months' => $mounts, 'days' => $days];
     }
 
-    public static function sumDaysOffsetFromParallelJobs(array $days, array $shiftDaysParallelJobs): int
+    public static function getTotalWorkTime(array $days, array $shiftDaysParallelJobs): int
     {
         $maxDays = 0;
 
         foreach ($days as $key => $val) {
-            var_dump($val, $shiftDaysParallelJobs[$key]);die;
             $sumDay = $val + $shiftDaysParallelJobs[$key];
             if ($sumDay > $maxDays) {
                 $maxDays = (int) $sumDay;
@@ -28,7 +31,11 @@ class DateTimeService
         return $maxDays;
     }
 
-    public static function daysOffsetFromParallelJobs(array $days, array $percentageParallelJobs, $keysMainType): array
+    public static function daysOffsetFromParallelJobs(
+        array $days,
+        array $percentageParallelJobs,
+        array $keysMainType
+    ): array
     {
         $daysOffset = 0;
         $res = [$keysMainType[$daysOffset] => 0];

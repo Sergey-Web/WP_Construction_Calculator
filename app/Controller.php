@@ -7,15 +7,11 @@ namespace App;
 use App\Services\AdditionalOption;
 use App\Services\CellService;
 use App\Services\DateTimeService;
-use App\Services\Director;
 use App\Services\GoogleDriveClientService;
 use App\Services\GoogleSpreadsheetClientService;
 use App\Services\House;
-use App\Services\Builders\Builder;
 use App\Services\MainType;
 use App\Services\NumericService;
-use App\Services\Options\Cell;
-use App\Services\Options\HouseParams\IMainValues;
 use App\Services\Report\ReportService;
 use App\Services\ValidationService;
 
@@ -55,8 +51,13 @@ class Controller
     public function getCost(array $data): void
     {
         $result = '';
+
         try {
-            if (!$this->validation->checkRequiredData($data)) throw new \Exception('error validation');
+
+            if (!$this->validation->checkRequiredData($data)) {
+                throw new \Exception('error validation');
+            }
+
             $house = new House($data);
             $mainType = new MainType($data);
             $additionalOption = new AdditionalOption($data);
@@ -129,9 +130,13 @@ class Controller
             $mainTypeCostSum = CellService::sumCells($costMainTypesActive);
             $additionalOptionSum = CellService::sumCells($additionalOption);
             $totalCost = $mainTypeCostSum + $additionalOptionSum;
-            $shiftDaysParallelJobs = DateTimeService::daysOffsetFromParallelJobs($mainTypeDays, $mainTypePercent, $keysMainType);
+            $shiftDaysParallelJobs = DateTimeService::daysOffsetFromParallelJobs(
+                $mainTypeDays,
+                $mainTypePercent,
+                $keysMainType
+            );
             $mainDays = $this->result($mainTypeDays, $keysMainType);
-            $totalDays = DateTimeService::sumDaysOffsetFromParallelJobs($mainDays, $shiftDaysParallelJobs);
+            $totalDays = DateTimeService::getTotalWorkTime($mainDays, $shiftDaysParallelJobs);
 
             $result = [
                 'calcId' => $spreadsheetId,
@@ -148,7 +153,7 @@ class Controller
             ];
 
         } catch (\Exception $e) {
-            echo $e->getMessage();wp_die();
+            echo json_encode(['error' => $e->getMessage()]);wp_die();
         }
 
         echo json_encode($result);wp_die();

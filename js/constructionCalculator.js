@@ -16,6 +16,10 @@ jQuery(document).ready(function () {
             data: values,
             success: function (data) {
                 dataCalc = JSON.parse(data);
+                if (dataCalc.error) {
+                    // alert(dataCalc.error);
+                    return;
+                }
                 if (typeof dataCalc === "object") {
                     report = dataCalc;
                 }
