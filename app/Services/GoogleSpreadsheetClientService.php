@@ -33,6 +33,7 @@ class GoogleSpreadsheetClientService
             'values' => $values
         ]);
         $params = ['valueInputOption' => 'USER_ENTERED'];
+
         $this->service->spreadsheets_values->update(
             $spreadsheetId,
             $range,
@@ -63,7 +64,7 @@ class GoogleSpreadsheetClientService
     }
 
 
-    public function updateMainParams(string $spreadsheetId, IMainData $data): void
+    public function updateMainParams(string $spreadsheetId, IMainData $data, string $range): void
     {
         $houseParams = [];
         foreach ($data->getData() as $key => $item) {
@@ -73,7 +74,7 @@ class GoogleSpreadsheetClientService
 
         $this->updateValueCells(
             $spreadsheetId,
-            $_ENV['CALC_HOUSE_PARAMS_RANGE'],
+            $range,
             $houseParams
         );
     }

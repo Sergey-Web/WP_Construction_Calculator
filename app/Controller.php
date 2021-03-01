@@ -9,8 +9,8 @@ use App\Services\CellService;
 use App\Services\DateTimeService;
 use App\Services\GoogleDriveClientService;
 use App\Services\GoogleSpreadsheetClientService;
-use App\Services\House;
-use App\Services\MainType;
+use App\Services\HouseCalc;
+use App\Services\MainTypeCalc;
 use App\Services\NumericService;
 use App\Services\Report\ReportService;
 use App\Services\ValidationService;
@@ -58,9 +58,9 @@ class Controller
                 throw new \Exception('error validation');
             }
 
-            $house = new House($data);
-            $mainType = new MainType($data);
-            $additionalOption = new AdditionalOption($data);
+            $house = new HouseCalc($data);
+            $mainType = new MainTypeCalc($data);
+            $additionalType = new AdditionalOption($data);
             $googleFileName = (new \DateTime)->format('Y-m-d_h_i_s');
 
             $spreadsheetId = $this->googleDriveClientService
@@ -70,13 +70,13 @@ class Controller
                 )
                 ->id;
 
-            $this->googleClientSpreadsheetService->updateMainParams($spreadsheetId, $house);
+            $this->googleClientSpreadsheetService->updateMainParams($spreadsheetId, $house, $_ENV['CALC_HOUSE_PARAMS_RANGE']);
             $this->googleClientSpreadsheetService->updateCheckBoxRequireOptions($spreadsheetId, $mainType, $_ENV['CALC_MAIN_TYPES_RANGE']);
-            $this->googleClientSpreadsheetService->updateCheckBoxOptions($spreadsheetId, $additionalOption, $_ENV['CALC_ADDITIONAL_OPTIONS_RANGE']);
+            $this->googleClientSpreadsheetService->updateCheckBoxOptions($spreadsheetId, $additionalType, $_ENV['CALC_ADDITIONAL_OPTIONS_RANGE']);
 
             $activeTypes = $mainType->getActiveOptions();
             $dataMainTypesInactive = $mainType->getInactiveOptions();
-            $dataAdditionalOption = $additionalOption->getActiveOptions();
+            $dataAdditionalOption = $additionalType->getActiveOptions();
             $dataButchUpdate = [];
 
             foreach ($activeTypes as $key => $item) {
@@ -90,13 +90,6 @@ class Controller
                 $dataButchUpdate[] = [
                     'range' => $_ENV['CALC_TAB_NAME'] . (new $item)->getNameCellMainActive(),
                     'values' => [['TRUE']]
-                ];
-            }
-
-            foreach ($dataMainTypesInactive as $key => $item) {
-                $dataButchUpdate[] = [
-                    'range' => $_ENV['CALC_TAB_NAME'] . (new $item)->getNameCellType(),
-                    'values' => [[1]]
                 ];
             }
 
@@ -125,6 +118,7 @@ class Controller
                 ->getValueCells($spreadsheetId,  $_ENV['REPORT_RESULT_ADDITIONAL_OPTION_RANGE']);
 
             $keysMainType = array_keys($mainType->getOptions());
+            $keysAdditionalType = array_keys($additionalType->getOptions());
 
             $costMainTypesActive = CellService::getDataActiveOptions($costMainType, $data, $keysMainType);
             $mainTypeCostSum = CellService::sumCells($costMainTypesActive);
@@ -138,10 +132,19 @@ class Controller
             $mainDays = $this->result($mainTypeDays, $keysMainType);
             $totalDays = DateTimeService::getTotalWorkTime($mainDays, $shiftDaysParallelJobs);
 
+            $dataHouse = [
+                'area' => $data['area'],
+                'numberRooms' => $data['numberRooms'],
+                'numberBathrooms' => $data['numberBathrooms'],
+                'numberInhabitants' => $data['numberInhabitants'],
+            ];
+
             $result = [
+                'house' => $dataHouse,
                 'calcId' => $spreadsheetId,
                 'fileName' => $googleFileName,
                 'mainTypeCost' => $this->result($costMainType, $keysMainType),
+                'additionalTypeCost' => $this->result($additionalOption, $keysAdditionalType),
                 'mainTypeCostInactive' => array_keys($dataMainTypesInactive),
                 'mainTypeSum' => NumericService::costSeparator($mainTypeCostSum, ' '),
                 'mainTypeDays' => $mainDays,

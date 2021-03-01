@@ -6,6 +6,7 @@ namespace App\Services\Report;
 
 use App\Services\GoogleDriveClientService;
 use App\Services\GoogleSpreadsheetClientService;
+use App\Services\HouseCalc;
 use DateTime;
 
 class ReportService
@@ -29,9 +30,34 @@ class ReportService
     public function save(array $data): void
     {
         $reportSpreadsheetId = $this->copySpreadsheet($_ENV['REPORT_SPREADSHEET_ID']);
-        $this->saveResult($reportSpreadsheetId, $_ENV['REPORT_RESULT_COST_RANGE'], array_values($data['mainTypeCost']));
-        $this->saveResult($reportSpreadsheetId, $_ENV['REPORT_RESULT_DAYS_RANGE'], array_values($data['mainTypeDays']));
-        $this->saveResult($reportSpreadsheetId, $_ENV['REPORT_RESULT_PERCENT_COMPLETION_RANGE'], array_values($data['mainTypePercent']));
+
+        $house = new HouseCalc($data['house']);
+        $this->googleClientSpreadsheetService->updateMainParams(
+            $reportSpreadsheetId,
+            $house,
+            $_ENV['REPORT_CONDITIONS']
+        );
+
+        $this->saveResult(
+            $reportSpreadsheetId,
+            $_ENV['REPORT_MAIN_COST_RANGE'],
+            array_values($data['mainTypeCost'])
+        );
+
+        $this->saveResult(
+            $reportSpreadsheetId,
+            $_ENV['REPORT_ADDITIONAL_COST_RANGE'],
+            array_values($data['additionalTypeCost'])
+        );
+
+        $date = array_values($data['totalDays']);
+
+        $this->saveResult(
+            $reportSpreadsheetId,
+            $_ENV['REPORT_TOTAL_DAYS'],
+            [$date[0] . ' месяцев и ' . $date[1] . ' дней']
+        );
+
         $fileName = $this->createFilePdf($reportSpreadsheetId, $data['fileName'], $data['email']);
         $pdfId = $this->uploadFile($fileName);
         $this->shareFile($pdfId, $data['email']);

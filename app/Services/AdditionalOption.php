@@ -100,8 +100,12 @@ class AdditionalOption implements IOption
     {
         $data = [];
         foreach ($this->data as $key => $item) {
-            if (array_key_exists($key, $this->options) === false) continue;
-            if ((int) $item > 0) $data[$key] = $key;
+            if (array_key_exists($key, $this->options) === false) {
+                continue;
+            }
+            if ((int) $item > 0) {
+                $data[$key] = $key;
+            }
         }
 
         $this->optionReceived = array_merge($this->options, $data);

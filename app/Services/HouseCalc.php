@@ -6,7 +6,7 @@ namespace App\Services;
 
 use App\Services\Options\HouseParams\{Area, Room, Bathroom, Inhabitant};
 
-class House implements IMainData
+class HouseCalc implements IMainData
 {
     public $listMainData = [
         'area' => Area::class,
