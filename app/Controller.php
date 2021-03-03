@@ -117,6 +117,12 @@ class Controller
             $additionalOption = $this->googleClientSpreadsheetService
                 ->getValueCells($spreadsheetId,  $_ENV['REPORT_RESULT_ADDITIONAL_OPTION_RANGE']);
 
+            $additionalTypes = $this->googleClientSpreadsheetService
+                ->getValueCells($spreadsheetId,  $_ENV['REPORT_RESULT_ADDITIONAL_TYPE_RANGE']);
+
+            $mainTypes = $this->googleClientSpreadsheetService
+                ->getValueCells($spreadsheetId,  $_ENV['REPORT_RESULT_MAIN_TYPE_RANGE']);
+
             $keysMainType = array_keys($mainType->getOptions());
             $keysAdditionalType = array_keys($additionalType->getOptions());
 
@@ -153,6 +159,8 @@ class Controller
                 'shiftDaysParallelJobs' => $shiftDaysParallelJobs,
                 'totalCost' => NumericService::costSeparator($totalCost, ' '),
                 'totalDays' => DateTimeService::getMonthDate($totalDays),
+                'additionalTypes' => $additionalTypes,
+                'mainTypes' => $mainTypes,
             ];
 
         } catch (\Exception $e) {
@@ -165,13 +173,18 @@ class Controller
     public function saveReport(array $data): void
     {
         try {
-            if (!$this->validation->checkRequiredReportId($data)) throw new \Exception('error validation report');
+            if (!$this->validation->checkRequiredReportId($data)) {
+                throw new \Exception('error validation report');
+            }
+
             (new ReportService())->save($data);
         } catch (\Exception $e) {
 
-            echo $e->getMessage();wp_die();
+            echo $e->getMessage();
+            wp_die();
         }
-        echo 'ok';wp_die();
+        echo 'ok';
+        wp_die();
     }
 
     private function result(array $resultPercentCompletionRange, array $types): array

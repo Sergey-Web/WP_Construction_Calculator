@@ -8,6 +8,19 @@ use Exception;
 
 class CellService
 {
+    public static function conversionTypeSymbols(array $data, string $symbol = '•'): array
+    {
+        $result = [];
+        foreach ($data as $key => $val) {
+            $result[$key] = $symbol;
+            for ($i = 0; $i < $val[0] - 1; $i++) {
+                $result[$key] .= ' ' . $symbol;
+            }
+        }
+
+        return $result;
+    }
+
     public static function sumCells(array $data): int
     {
         $sum = 0;

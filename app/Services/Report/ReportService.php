@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Report;
 
+use App\Services\CellService;
 use App\Services\GoogleDriveClientService;
 use App\Services\GoogleSpreadsheetClientService;
 use App\Services\HouseCalc;
@@ -48,6 +49,18 @@ class ReportService
             $reportSpreadsheetId,
             $_ENV['REPORT_ADDITIONAL_COST_RANGE'],
             array_values($data['additionalTypeCost'])
+        );
+
+        $this->saveResult(
+            $reportSpreadsheetId,
+            $_ENV['REPORT_MAIN_COST_CATEGORY_RANGE'],
+            CellService::conversionTypeSymbols($data['mainTypes'])
+        );
+
+        $this->saveResult(
+            $reportSpreadsheetId,
+            $_ENV['REPORT_ADDITIONAL_COST_CATEGORY_RANGE'],
+            CellService::conversionTypeSymbols($data['additionalTypes'])
         );
 
         $date = array_values($data['totalDays']);
