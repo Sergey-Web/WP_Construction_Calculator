@@ -12,6 +12,11 @@ class CellService
     {
         $result = [];
         foreach ($data as $key => $val) {
+            if ($val[0] == 0) {
+                $result[$key] = '-';
+                continue;
+            }
+
             $result[$key] = $symbol;
             for ($i = 0; $i < $val[0] - 1; $i++) {
                 $result[$key] .= ' ' . $symbol;
